@@ -1,4 +1,4 @@
-package main
+package handler
 
 import (
 	"context"
@@ -21,7 +21,7 @@ type Todo struct {
 
 var collection *mongo.Collection
 
-func main() {
+func Handler() {
 	if os.Getenv("ENV") != "production" {
 		err := godotenv.Load(".env")
 		if err != nil {
@@ -67,7 +67,7 @@ func main() {
 	}
 
 	if os.Getenv("ENV") == "production" {
-		app.Static("/", "./client/dist")
+		app.Static("/", "../client/dist")
 	}
 
 	log.Fatal(app.Listen(":" + port))
