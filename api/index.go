@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"net/http"
 	"os"
 
 	"github.com/gofiber/fiber/v2"
@@ -21,7 +22,7 @@ type Todo struct {
 
 var collection *mongo.Collection
 
-func Handler() {
+func Handler(w http.ResponseWriter, r *http.Request) {
 	if os.Getenv("ENV") != "production" {
 		err := godotenv.Load(".env")
 		if err != nil {
